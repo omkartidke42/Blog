@@ -1,0 +1,5 @@
+name: 'Ice Cream'
+type: theme
+description: 'Great theme'
+core_version_requirement: ^11
+base theme: false
