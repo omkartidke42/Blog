@@ -16,3 +16,5 @@ regions:
     page_bottom: 'Page bottom'
 
 
+libraries:
+  - icecream/global-styling
