@@ -17,3 +17,9 @@ parameters:
 services:
   cache.backend.null:
     class: Drupal\Core\Cache\NullBackendFactory
+
+parameters:
+twig.config:
+  debug: true   # if enabled will output some extra markup alongside of each twig template, easy to identify which tempet is being used
+  auto_record: true # ensures twig templates are recompiled from source each time they are used
+  cache: false # disable twig caching
