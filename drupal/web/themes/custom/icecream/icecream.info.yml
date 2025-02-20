@@ -18,3 +18,9 @@ regions:
 
 libraries:
   - icecream/global-styling
+
+settings:
+  icecream_custom_text: ''
+  icecream_custom_color: '#ffcc00'  # Default theme color (hex code)
+  icecream_custom_logo: null  # No default logo uploaded
+  icecream_enable_featured_posts: false  # Disable featured posts by default  

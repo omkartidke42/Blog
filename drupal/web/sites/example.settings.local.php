@@ -62,7 +62,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-$settings['cache']['bins']['render'] = 'cache.backend.null';
+# $settings['cache']['bins']['render'] = 'cache.backend.null';
 
 /**
  * Disable caching for migrations.
@@ -84,9 +84,9 @@ $settings['cache']['bins']['render'] = 'cache.backend.null';
  *
  * Only use this setting once the site has been installed.
  */
- $settings['cache']['bins']['page'] = 'cache.backend.null';
+# $settings['cache']['bins']['page'] = 'cache.backend.null';
 
-/** 
+/**
  * Disable Dynamic Page Cache.
  *
  * Note: you should test with Dynamic Page Cache enabled, to ensure the correct

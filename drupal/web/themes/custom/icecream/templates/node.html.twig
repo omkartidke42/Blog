@@ -71,7 +71,10 @@
   ]
 %}
 {{ attach_library('claro/classy.node') }}
+{{kint(_context|keys)}}
 <article{{ attributes.addClass(classes) }}>
+
+{# {{dump(_context|keys)}} #}
 
   {{ title_prefix }}
   {% if label and not page %}
