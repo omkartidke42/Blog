@@ -2,13 +2,19 @@
 <link rel="stylesheet" href="{{ directory }}/css/style.css">
 
   {{ page.primary_menu }}
+  <body{{ attributes }}>
+
 
   <main role="main">
     <div class="visually-hidden"><a id="main-content" tabindex="-1"></a></div>
    
 
     <div class="layout-container">
-     
+    <h1>
+         {{icecream_custom_text}}
+
+    </h1>
+
         {{ page.content }}
         {{ page.content_bottom }}
       </div>

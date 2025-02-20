@@ -1,0 +1,12 @@
+<?php
+/**
+ * Implements hook_preprocess_page().
+ */
+function icecream_preprocess_page(&$variables) {
+  // Pass custom footer text to the template.
+  $variables['icecream_custom_text'] = theme_get_setting('icecream_custom_text');
+  // Pass custom background color to the template.
+  $variables['icecream_custom_color'] = theme_get_setting('icecream_custom_color');
+  // Pass dark mode setting to the template.
+  
+}
