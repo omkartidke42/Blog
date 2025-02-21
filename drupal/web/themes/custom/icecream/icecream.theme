@@ -2,11 +2,81 @@
 /**
  * Implements hook_preprocess_page().
  */
-function icecream_preprocess_page(&$variables) {
-  // Pass custom footer text to the template.
-  $variables['icecream_custom_text'] = theme_get_setting('icecream_custom_text');
-  // Pass custom background color to the template.
-  $variables['icecream_custom_color'] = theme_get_setting('icecream_custom_color');
-  // Pass dark mode setting to the template.
+// function icecream_preprocess_page(&$variables) {
+//   // Pass custom footer text to the template.
+//   $variables['icecream_custom_text'] = theme_get_setting('icecream_custom_text');
+//   // Pass custom background color to the template.
+//   $variables['icecream_custom_color'] = theme_get_setting('icecream_custom_color');
+//   // Pass dark mode setting to the template.
+//   $variables['#attached']['library'][] = 'icecream/blog_grid';
+
   
+// }
+
+
+// function icecream_preprocess_page(&$variables) {
+//   $variables['#attached']['library'][] = 'icecream/blog_grid';
+// }
+
+// function icecream_preprocess_region(&$variables) {
+//   $variables['#attached']['library'][] = 'icecream/blog_grid';
+// }
+
+function icecream_preprocess_page(&$variables) {
+  // Ensure 'items' is passed correctly
+  $variables['items'] = [
+    [
+      'title' => 'Sample Blog Post',
+      'url' => '/node/1',
+      'image' => 'path-to-image.jpg',
+      'category' => 'Technology',
+      'meta' => 'Published on Feb 20, 2025',
+    ],
+
+  ];
+        $variables['#attached']['library'][] = 'icecream/about_styles';
+         // Check if the current route is the homepage.
+         function icecream_preprocess_block(&$variables) {
+          // Check if the current route is the homepage.
+          $current_path = \Drupal::service('path.current')->getPath();
+          $front_page = \Drupal::config('system.site')->get('page.front');
+        
+          // Show search form only on homepage.
+          $variables['show_search_form'] = ($current_path === $front_page);
+        }
+        
+
 }
+
+
+
+
+
+// use Drupal\node\NodeInterface;
+// use Drupal\user\Entity\User;
+
+// function icecream_preprocess_field(&$variables) {
+//   // Ensure the field is associated with a node entity.
+//   if (!empty($variables['element']['#object']) && $variables['element']['#object'] instanceof NodeInterface) {
+//     $node = $variables['element']['#object'];
+//     $current_user = \Drupal::currentUser();
+//     $author_id = $node->getOwnerId();
+
+//     // Check if the current user is the author.
+//     if ($current_user->isAuthenticated() && $current_user->id() == $author_id) {
+//       $variables['label']['#markup'] = 'By You';  // Show "By You" if the logged-in user is the author.
+//     } else {
+//       // Load the author entity safely.
+//       $author = User::load($author_id);
+//       $author_name = ($author && !$author->isAnonymous()) ? $author->getDisplayName() : 'By other user';
+
+//       $variables['label']['#markup'] = $author_name;
+//     }
+//   } else {
+//     // If no node is found, display a default value.
+//     $variables['label']['#markup'] = 'By other user';
+//   }
+// }
+
+  
+  

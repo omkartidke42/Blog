@@ -18,6 +18,8 @@ regions:
 
 libraries:
   - icecream/global-styling
+  - icecream/about_styles
+
 
 settings:
   icecream_custom_text: ''

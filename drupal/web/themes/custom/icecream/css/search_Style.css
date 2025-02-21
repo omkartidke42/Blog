@@ -1,0 +1,49 @@
+.block-search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: 20px; /* Adjust as needed */
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styling */
+.block-search input[type="text"],
+.block-search input[type="search"] {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Change border color on focus */
+.block-search input[type="text"]:focus,
+.block-search input[type="search"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Submit button styling */
+.block-search input[type="submit"],
+.block-search button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.block-search input[type="submit"]:hover,
+.block-search button:hover {
+    background: #0056b3;
+}

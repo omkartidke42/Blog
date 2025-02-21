@@ -1,8 +1,90 @@
 body {
-    background-color: #d34040 !important;
+    background-color: #ffff !important;
 }
 .custom-block-style {
     background-color: lightblue;
     padding: 20px;
     border: 2px solid black;
+}
+
+
+/* Navigation Menu Styles */
+.nav-menu {
+    display: flex;
+    gap: 24px; /* Space between items */
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+    justify-content: flex-end; /* Aligns items to the right */
+    align-items: center; /* Centers items vertically */
+}
+
+.nav-menu li {
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-menu li a {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333; /* Default text color */
+}
+
+.nav-menu li:hover {
+    color: #bbb; /* Light gray on hover */
+}
+
+.nav-menu .active {
+    font-weight: bold; /* Bold for active link */
+}
+
+/* Search form styling */
+form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styling */
+form input[type="text"],
+form input[type="search"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Change border color on focus */
+form input[type="text"]:focus,
+form input[type="search"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Submit button styling */
+form input[type="submit"],
+form button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Hover effect */
+form input[type="submit"]:hover,
+form button:hover {
+    background: #0056b3;
 }

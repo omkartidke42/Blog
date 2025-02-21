@@ -1,0 +1,7 @@
+<ul class="nav-menu">
+  {% for item in items %}
+    <li class="{% if item.in_active_trail %} active {% endif %}">
+      <a href="{{ item.url }}">{{ item.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

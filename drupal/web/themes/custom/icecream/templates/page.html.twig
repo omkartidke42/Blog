@@ -1,4 +1,4 @@
-<div class="layout-container">
+{# <div class="layout-container">
 <link rel="stylesheet" href="{{ directory }}/css/style.css">
 
   {{ page.primary_menu }}
@@ -33,4 +33,54 @@
   </footer>
   {% endif %}
 
+</div> <!-- Closing layout-container --> #}
+
+<div class="layout-container">
+  <link rel="stylesheet" href="{{ directory }}/css/style.css">
+  <link rel="stylesheet" href="{{ directory }}/css/blog-grid.css">
+
+
+  <!-- Navbar -->
+  <nav class="bg-gray-800 text-white p-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div>
+        {{ page.primary_menu }}
+      </div>
+    </div>
+  </nav>
+
+  <body{{ attributes }}>
+    <main role="main">
+      <div class="visually-hidden">
+        <a id="main-content" tabindex="-1"></a>
+      </div>
+
+      <div class="layout-container">
+        <h1 class="text-3xl font-semibold text-center py-4">
+          {{ icecream_custom_text }}
+        </h1>
+
+        {{ page.content }}
+        {{ page.content_bottom }}
+      </div>
+    </main>
+
+    {% if page.banner_bottom %}
+      <div class="layout-banner-bottom" role="banner">
+        {{ page.banner_bottom }}
+      </div>
+    {% endif %}
+
+    {% if page.footer %}
+      <footer role="contentinfo" class="bg-gray-900 text-white p-4 text-center">
+        {{ page.footer }}
+      </footer>
+    {% endif %}
+
+    {% if page.content %}
+  
+  </div>
+{% endif %}
+
+  </body>
 </div> <!-- Closing layout-container -->

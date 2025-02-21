@@ -1,0 +1,19 @@
+
+{%
+  set body_classes = [
+    logged_in ? 'user-logged-in',
+    not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+    node_type ? 'page-node-type-' ~ node_type|clean_class,
+    db_offline ? 'db-offline',
+  ]
+%}
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+ <div class="about-us-page">
+  <h1 class="Custom_Class">{{ label }}</h1>
+  <div class="about-content">
+    {{ content}}
+  </div>
+</div>
+  </body>
+</html>
