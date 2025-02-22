@@ -16,7 +16,7 @@
     flex: 1;
     max-width: 25%;
     padding: 10px;
-    background: #62e40c;
+    background: #ffffff;
     border-radius: 10px;
     text-align: center;
 }
@@ -24,7 +24,7 @@
 .custom-title {
     text-align: center;
     font-size: 24px;
-    color: #e60909;
+    color: #1e10e4;
 }
 
 /* Styling for images */
