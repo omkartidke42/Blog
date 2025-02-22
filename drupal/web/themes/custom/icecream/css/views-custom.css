@@ -1,0 +1,35 @@
+/* Custom styles for the views grid */
+.custom-views-grid { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;  
+    justify-content: center ;
+}
+
+.custom-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.custom-col {
+    flex: 1;
+    max-width: 25%;
+    padding: 10px;
+    background: #62e40c;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.custom-title {
+    text-align: center;
+    font-size: 24px;
+    color: #e60909;
+}
+
+/* Styling for images */
+.custom-col img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}

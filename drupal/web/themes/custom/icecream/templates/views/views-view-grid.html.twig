@@ -1,0 +1,48 @@
+<style>
+  .custom-views-grid { 
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 20px !important;  
+      justify-content: center !important;
+  }
+
+  .custom-row {
+      display: flex !important;
+      width: 100% !important;
+      justify-content: space-around !important;
+  }
+
+  .custom-col {
+      flex: 1 !important;
+      max-width: 25% !important;
+      padding: 10px !important;
+      background:rgb(29, 243, 75) !important;
+      border-radius: 10px !important;
+      text-align: center !important;
+  }
+
+  .custom-title {
+      text-align: center !important;
+      font-size: 24px !important;
+      {# color: b !important; #}
+  }
+
+  /* Styling for images */
+  .custom-col img {
+      width: 100% !important;
+      height: 300px !important;
+      border-radius: 8px !important;
+  }
+</style>
+
+<div{{ attributes.addClass('custom-views-grid') }}>
+  {% for row in items %}
+    <div{{ row.attributes.addClass('custom-row') }}>
+      {% for column in row.content %}
+        <div{{ column.attributes.addClass('custom-col') }}>
+          {{- column.content -}}
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>

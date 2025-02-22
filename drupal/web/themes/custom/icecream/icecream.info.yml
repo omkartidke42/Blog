@@ -16,8 +16,11 @@ regions:
     page_bottom: 'Page bottom'
 
 
+# libraries:
+#   - icecream/global-styling
 libraries:
-  - icecream/global-styling
+  - icecream/views-custom
+
 
 settings:
   icecream_custom_text: ''
