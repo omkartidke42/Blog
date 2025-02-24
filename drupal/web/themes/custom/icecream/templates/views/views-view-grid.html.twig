@@ -1,36 +1,91 @@
 <style>
+  /* === Blog Grid Layout === */
   .custom-views-grid { 
       display: flex !important;
       flex-wrap: wrap !important;
-      gap: 20px !important;  
+      gap: 40px !important;  
       justify-content: center !important;
+      max-width: 1200px;
+      margin: auto;
   }
+
+  .title {
+    color: yellow !important;
+}
+
 
   .custom-row {
       display: flex !important;
       width: 100% !important;
-      justify-content: space-around !important;
+      justify-content: space-between !important;
   }
 
   .custom-col {
       flex: 1 !important;
-      max-width: 25% !important;
-      padding: 10px !important;
-      background:rgb(29, 243, 75) !important;
+      max-width: 30% !important; /* Adjust to keep three columns */
+      padding: 15px !important;
+      background: rgb(0, 0, 0) !important;
       border-radius: 10px !important;
-      text-align: center !important;
+      text-align: left !important;
+      box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease-in-out;
   }
 
+  /* Hover effect */
+  .custom-col:hover {
+      transform: scale(1.03);
+  }
+
+  /* === Blog Category Title === */
+  .custom-category {
+      font-size: 20px;
+      font-weight: bold;
+      color: blue;
+      padding: 10px 0;
+  }
+
+  /* === Blog Title Styling (Updated to White/Yellow) === */
   .custom-title {
-      text-align: center !important;
-      font-size: 24px !important;
+      font-size: 22px !important;
+      font-weight: bold;
+      color: yellow !important;
+      margin-top: 10px;
   }
 
-  /* Styling for images */
+  /* === Image Styling === */
   .custom-col img {
       width: 100% !important;
-      height: 300px !important;
+      height: 200px !important;
+      object-fit: cover;
       border-radius: 8px !important;
+  }
+
+  /* === Blog Subtitle === */
+  .custom-subtitle {
+      font-size: 16px;
+      color: gray;
+      margin: 5px 0;
+  }
+
+  /* === Icons for Like, Comment, Views === */
+  .custom-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      font-size: 14px;
+      color: #ddd;
+  }
+
+  .custom-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+  }
+
+  .custom-meta i {
+      font-size: 16px;
+      color: #ffcc00; /* Changed to yellow for better contrast */
   }
 </style>
 
@@ -39,9 +94,18 @@
     <div{{ row.attributes.addClass('custom-row') }}>
       {% for column in row.content %}
         <div{{ column.attributes.addClass('custom-col') }}>
+          {# <span class="custom-category">News</span> #}
           {{- column.content -}}
+          <div class="custom-meta">
+            <span><i class="fas fa-eye"></i> 0</span>
+            <span><i class="fas fa-comment"></i> 0</span>
+            <span><i class="fas fa-heart"></i> 27</span>
+          </div>
         </div>
       {% endfor %}
     </div>
   {% endfor %}
 </div>
+
+<!-- Add FontAwesome for Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>

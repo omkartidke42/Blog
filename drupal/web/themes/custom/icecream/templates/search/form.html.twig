@@ -1,0 +1,46 @@
+<style>
+  /* Style the form container */
+  form {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      background-color: black; /* Dark theme */
+      padding: 10px;
+      border-radius: 20px;
+  }
+
+  /* Style the input field */
+  form input[type="text"] {
+      width: 250px;
+      padding: 10px;
+      border: 2px solid #ffcc00; /* Gold border */
+      border-radius: 20px;
+      background-color: #222;
+      color: white;
+      font-size: 16px;
+  }
+
+  /* Style the submit button */
+  form input[type="submit"] {
+      padding: 10px 15px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ffcc00;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+  }
+
+  /* Button hover effect */
+  form input[type="submit"]:hover {
+      background-color: #e6b800;
+  }
+
+</style>
+
+<form{{ attributes }}>
+  {{ children }}
+</form>

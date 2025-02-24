@@ -10,3 +10,25 @@ function icecream_preprocess_page(&$variables) {
   // Pass dark mode setting to the template.
   
 }
+
+
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function icecream_theme_suggestions_alter(array &$suggestions, array $variables) {
+  // Check if rendering a node.
+  if (isset($variables['node']) && $variables['node'] instanceof \Drupal\node\NodeInterface) {
+    $node = $variables['node'];
+    
+    // Apply custom template for "blog" content type.
+    if ($node->bundle() == 'blog') {
+      $suggestions[] = 'node__blog'; // Loads "node--blog.html.twig"
+      
+      // Check if the blog post is "Featured"
+      if ($node->hasField('field_featured') && $node->get('field_featured')->value == 1) {
+        $suggestions[] = 'node__blog__featured'; // Loads "node--blog--featured.html.twig"
+      }
+    }
+  }
+}

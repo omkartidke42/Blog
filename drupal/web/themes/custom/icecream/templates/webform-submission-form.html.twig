@@ -1,0 +1,77 @@
+<form{{ attributes }}>
+  <style>
+    .newsletter-form-container {
+      background-color: #111;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+      font-family: Arial, sans-serif;
+    }
+
+    .newsletter-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
+
+    .newsletter-description {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .newsletter-form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      background: black;
+      border: 2px solid #ffcc00;
+      background: #222;
+      color: white;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    
+    .newsletter-form input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      background: black;
+      border: 2px solid #ffcc00;
+      background: #222;
+      color: white;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .newsletter-form input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #ffcc00;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border-radius: 5px;
+    }
+
+    .newsletter-form input[type="submit"]:hover {
+      background-color: #e6b800;
+    }
+  </style>
+
+  <div class="newsletter-form-container">
+    <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+    <p class="newsletter-description">Stay updated with the latest news and updates!</p>
+    
+    <div class="newsletter-form">
+      {{ form }}
+    </div>
+  </div>
+</form>

@@ -1,0 +1,125 @@
+<style>
+/* === General Menu Styling === */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: black; /* Black-themed navbar */
+  justify-content: flex-end;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-item a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 15px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-item a:hover,
+.menu-item--active-trail > a {
+  color: #ffcc00; /* Gold color on hover/active */
+  text-decoration: underline;
+    transform: scale(1.1); /* Increase size slightly */
+
+}
+
+/* === Dropdown Menu Styling === */
+.menu-item--expanded {
+  position: relative;
+}
+
+.menu-item--expanded > ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #222; /* Darker black for dropdown */
+  border-radius: 5px;
+  padding: 10px 0;
+  list-style: none;
+  min-width: 180px;
+}
+
+.menu-item--expanded:hover > ul {
+  display: block;
+}
+
+.menu-item--expanded ul .menu-item a {
+  color: white;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+}
+
+.menu-item--expanded ul .menu-item a:hover {
+  background-color: inherit;
+}
+
+/* === Mobile Responsive Menu === */
+@media (max-width: 991px) {
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu-item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu-item a {
+    display: block;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .menu-item--expanded > ul {
+    position: relative;
+    width: 100%;
+    background-color: black;
+  }
+}
+</style>
+
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see https://twig.symfony.com/doc/3.x/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass('menu') }}>
+    {% else %}
+      <ul class="menu">
+    {% endif %}
+    {% for item in items %}
+      {%
+        set classes = [
+          'menu-item',
+          item.is_expanded ? 'menu-item--expanded',
+          item.is_collapsed ? 'menu-item--collapsed',
+          item.in_active_trail ? 'menu-item--active-trail',
+        ]
+      %}
+      <li{{ item.attributes.addClass(classes) }}>
+        {{ link(item.title, item.url) }}
+        {% if item.below %}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
