@@ -21,6 +21,9 @@ regions:
 libraries:
   - icecream/views-custom
   - icecream/blog_interactions
+  - icecream/blog_greeting
+  - icecream/reading_progress
+
 
 
 

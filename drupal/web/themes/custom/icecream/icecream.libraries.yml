@@ -10,3 +10,8 @@ blog_interactions:
   dependencies:
     - core/drupal
 
+reading_progress:
+  js:
+    js/reading_progress.js: { attributes: { defer: true } }
+  dependencies:
+    - core/drupal
