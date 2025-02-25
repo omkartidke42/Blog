@@ -3,3 +3,10 @@ custom-styles:
   css:
     theme:
       css/views-custom.css: {}
+
+blog_interactions:
+  js:
+    js/blog_interactions.js: { attributes: { defer: true } }
+  dependencies:
+    - core/drupal
+

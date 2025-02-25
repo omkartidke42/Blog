@@ -32,3 +32,25 @@ function icecream_theme_suggestions_alter(array &$suggestions, array $variables)
     }
   }
 }
+
+function icecream_preprocess_node(array &$variables) {
+  // Get the node object.
+  $node = $variables['node'] ?? NULL;
+
+  // Ensure this is a node object and the correct content type.
+  if ($node instanceof \Drupal\node\NodeInterface && $node->bundle() === 'blog') {
+    
+    // Check if the 'body' field exists and is not empty.
+    if ($node->hasField('body') && !$node->get('body')->isEmpty()) {
+      $body = $node->get('body')->value;
+      $word_count = str_word_count(strip_tags($body));
+      $reading_time = ceil($word_count / 200);
+      $variables['reading_time'] = $reading_time;
+    } else {
+      // If body field is missing, set a default value.
+      $variables['reading_time'] = 0;
+    }
+  }
+}
+
+

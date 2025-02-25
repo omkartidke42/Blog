@@ -20,6 +20,8 @@ regions:
 #   - icecream/global-styling
 libraries:
   - icecream/views-custom
+  - icecream/blog_interactions
+
 
 
 settings:
