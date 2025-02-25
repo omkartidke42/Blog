@@ -1,0 +1,7 @@
+<?php
+
+function blog_features_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == "node_blog_form") {
+    $form['#attached']['library'][] = 'blog_features/word_count';
+  }
+}

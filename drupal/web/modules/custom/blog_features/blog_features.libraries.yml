@@ -1,0 +1,5 @@
+word_count:
+  js:
+    js/word_count.js: {}
+  dependencies:
+    - core/drupal
