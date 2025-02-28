@@ -1,6 +1,11 @@
 body {
     background-color: #000000 !important;
 }
+.custom-title-link a {
+  color: white !important; 
+  text-decoration: none !important;
+}
+
 .custom-block-style {
     background-color: lightblue;
     padding: 20px;

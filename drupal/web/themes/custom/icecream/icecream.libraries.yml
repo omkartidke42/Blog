@@ -15,3 +15,9 @@ reading_progress:
     js/reading_progress.js: { attributes: { defer: true } }
   dependencies:
     - core/drupal
+
+footer:
+  version: 1.x
+  css:
+    theme:
+      components/footer/footer.css: {}

@@ -1,0 +1,16 @@
+blog_interactions.views:
+  path: '/api/blog/{nid}/views'
+  defaults:
+    _controller: '\Drupal\blog_interactions\Controller\BlogInteractionController::incrementViews'
+    _format: 'json'
+  requirements:
+    _permission: 'access content'
+
+blog_interactions.likes:
+  path: '/api/blog/{nid}/likes'
+  defaults:
+    _controller: '\Drupal\blog_interactions\Controller\BlogInteractionController::addLike'
+    _format: 'json'
+  requirements:
+    _permission: 'access content'
+    _method: 'POST'
