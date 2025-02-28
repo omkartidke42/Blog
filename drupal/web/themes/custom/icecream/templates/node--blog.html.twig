@@ -1,0 +1,152 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ content.field_title }}</title>
+    {{ attach_library('claro/classy.node') }}
+    {{ attach_library('icecream/js/blog_interactions') }}
+
+    <style>
+      /* Apply Dark Theme to Whole Page */
+      body {
+          background-color: #0a0a0a;
+          color: #ffffff;
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+      }
+
+      /* Center the Blog Content */
+      .blog-container {
+          max-width: 900px;
+          margin: 30px auto;
+          padding: 20px;
+          background-color: #121212;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .blog-container:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+      }
+
+      /* Blog Title Styling */
+      .blog-title {
+          font-size: 2.5rem;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 15px;
+          color:rgb(247, 211, 12); /* Spotify Green */
+      }
+
+      /* Blog Tags Styling */
+      .blog-tags {
+          font-size: 0.9rem;
+          color: #b3b3b3;
+          text-align: center;
+          margin-bottom: 15px;
+      }
+
+      /* Blog Image Styling */
+      .blog-image img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin-bottom: 20px;
+          box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+      }
+
+      /* Blog Content Styling */
+      .blog-content {
+          font-size: 1.2rem;
+          line-height: 1.8;
+          text-align: justify;
+      }
+
+      /* Footer Styling */
+      .blog-footer {
+          text-align: center;
+          font-size: 0.9rem;
+          color: #b3b3b3;
+          margin-top: 20px;
+          padding-top: 10px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Responsive Styling */
+      @media (max-width: 768px) {
+          .blog-container {
+              margin: 15px;
+              padding: 15px;
+          }
+
+          .blog-title {
+              font-size: 2rem;
+          }
+
+          .blog-content {
+              font-size: 1rem;
+          }
+      }
+
+      .reading-time {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+    margin-top: 10px;
+  }
+  .word-count {
+    font-size: 14px;
+    color: #444;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+    </style>
+  </head>
+  <body>
+
+    <div class="blog-container">
+      <!-- Blog Title -->
+      {% if content.field_title %}
+        <h1 class="blog-title">{{ content.field_title }}</h1>
+      {% endif %}
+
+      <!-- Blog Tags -->
+      {% if content.field_tag %}
+        <div class="blog-tags">
+          <strong>Tags:</strong> {{ content.field_tag }}
+        </div>
+      {% endif %}
+
+      <!-- Blog Image -->
+      {% if content.field_images %}
+        <div class="blog-image">
+          {{ content.field_images }}
+        </div>
+      {% endif %}
+
+      <!-- Blog Content -->
+      {% if content.field_blog_content %}
+        <div class="blog-content">
+          {{ content.field_blog_content }}
+        </div>
+         <div{{ content_attributes.addClass('node__content') }}>
+
+        {{ content }}
+        <p class="reading-time"><em>Estimated reading time: {{ reading_time }} minute(s)</em></p>
+        <p class="word-count">Word Count: {{ word_count }}</p>
+
+  </div>
+      {% endif %}
+
+      <!-- Footer -->
+      <div class="blog-footer">
+        <p>Powered by Drupal | Dark Mode Blog</p>
+      </div>
+    </div>
+
+  </body>
+  </html>

@@ -23,6 +23,8 @@ libraries:
   - icecream/blog_interactions
   - icecream/blog_greeting
   - icecream/reading_progress
+  - icecream/footer
+  - icecream/banner 
 
 
 

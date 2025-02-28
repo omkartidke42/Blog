@@ -12,8 +12,11 @@ function icecream_preprocess_page(&$variables) {
   if (\Drupal::routeMatch()->getRouteName() === 'entity.node.canonical' &&
       isset($variables['node']) &&
       $variables['node']->getType() === 'blog') {
-    $variables['#attached']['library'][] = 'yourtheme/reading_progress';
+    $variables['#attached']['library'][] = 'icecream/reading_progress';
   }
+
+  $current_path = \Drupal::service('path.current')->getPath();
+    $variables['is_homepage'] = ($current_path == '/');
   
 }
 
@@ -38,6 +41,8 @@ function icecream_theme_suggestions_alter(array &$suggestions, array $variables)
     }
   }
 }
+
+// Pre process function for reading time estimate and word count
 
 function icecream_preprocess_node(array &$variables) {
 

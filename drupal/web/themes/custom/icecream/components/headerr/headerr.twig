@@ -1,0 +1,74 @@
+<style>
+    .footer {
+        background-color: rgb(0, 0, 0);
+        color: #ecf0f1;
+        text-align: center;
+        padding: 20px 0;
+        font-family: Arial, sans-serif;
+        height: 300px; /* Fixed height */
+        display: flex;
+        justify-content: center; /* Horizontally center */
+        align-items: center; /* Vertically center */
+        border-top: 2px solid yellow;
+    }
+
+    .footer .container {
+        max-width: 1200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .footer-content {
+        text-align: center;
+    }
+
+    .footer-content p {
+        margin: 10px 0;
+        font-size: 14px;
+    }
+
+    .footer nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Spacing between links */
+    }
+
+    .footer nav ul li {
+        display: inline;
+    }
+
+    .footer nav ul li a {
+        color: #ecf0f1;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .footer nav ul li a:hover {
+       color: #ffcc00; /* Gold color on hover/active */
+  text-decoration: underline;
+    transform: scale(1.1); /* Increase size slightly */
+
+    }
+</style>
+    {% if is_homepage %}
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <p>&copy; {{ "now"|date("Y") }} Your Blog. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</footer>
+{% endif %}

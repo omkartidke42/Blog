@@ -1,0 +1,8 @@
+name: 'Blog Interactions API'
+type: module
+description: 'API for tracking likes and views on blog posts.'
+core_version_requirement: ^11
+package: Custom
+dependencies:
+  - drupal:jsonapi
+  - drupal:rest
