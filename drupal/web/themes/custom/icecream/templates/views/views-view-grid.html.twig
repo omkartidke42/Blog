@@ -185,7 +185,10 @@
             <button class="like-btn"><i class="fas fa-heart"></i> <span class="likes-count">{{ likes }}</span></button>
             
             <!-- View Count -->
-            <span class="view-btn"><i class="fas fa-eye"></i> <span class="views-count">{{ views }}</span></span>
+<button class="bookmark-btn" data-nid="{{ node.nid.value }}">
+  <i class="far fa-star"></i> Bookmark
+</button>
+
             
             <!-- Comments (Static for now) -->
             <span><i class="fas fa-comment"></i> 0</span>
@@ -295,3 +298,41 @@ document.querySelectorAll(".view-btn").forEach(button => {
     color: red;
   }
 </style>
+
+
+<script>
+  document.querySelectorAll('.bookmark-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    let nid = this.getAttribute('data-nid'); // Get the Node ID
+
+    if (!nid || isNaN(nid)) {  // Check if nid is missing or invalid
+      console.error("❌ Missing or invalid Node ID for bookmark request.");
+      return;
+    }
+
+    console.log("✅ Bookmark clicked! Sending request for NID:", nid);
+
+    fetch(`/blog/${nid}/bookmark`, {  // Ensure nid is properly appended
+      method: 'POST',
+      headers: { 
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("✅ Response received:", data);
+      if (data.status === 'added') {
+        this.innerHTML = '<i class="fas fa-star"></i> Bookmarked';
+      } else {
+        this.innerHTML = '<i class="far fa-star"></i> Bookmark';
+      }
+    })
+    .catch(error => console.error("❌ AJAX Error:", error));
+  });
+});
+
+
+
+</script>
