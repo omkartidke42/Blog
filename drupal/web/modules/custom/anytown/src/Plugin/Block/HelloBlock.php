@@ -13,7 +13,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  */
 #[Block(
   id: 'anytown_hello_world',
-  admin_label: new TranslatableMarkup('Hello World'),
+  admin_label: new TranslatableMarkup('Hello Custom block'),
   category: new TranslatableMarkup('Custom')
 )]
 
