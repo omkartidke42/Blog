@@ -10,6 +10,15 @@ blog_interactions:
   dependencies:
     - core/drupal
 
+blog_greeting:
+  version: 1.x
+  js:
+    js/blog_greeting.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+
+
 reading_progress:
   js:
     js/reading_progress.js: { attributes: { defer: true } }

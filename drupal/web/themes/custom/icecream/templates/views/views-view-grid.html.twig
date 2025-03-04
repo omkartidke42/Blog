@@ -101,88 +101,7 @@
   }
 </style>
 
-
-{# 
-<div{{ attributes.addClass('custom-views-grid') }}>
-  {% for row in items %}
-    <div{{ row.attributes.addClass('custom-row') }}>
-      {% for column in row.content %}
-        <div{{ column.attributes.addClass('custom-col') }}>
-          {{- column.content -}}
-          <div class="custom-meta" data-nid="{{ column.content['#node'].id }}">
-            <!-- Likes Button (User Clickable) -->
-            <span class="like-btn" data-nid="{{ column.content['#node'].id }}">
-              <i class="fas fa-heart"></i> <span class="likes-count">0</span>
-            </span>
-            
-            <!-- Views -->
-            <span><i class="fas fa-eye"></i> <span class="views-count">0</span></span>
-            
-            <!-- Comments (Static for now) -->
-            <span><i class="fas fa-comment"></i> 0</span>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% endfor %}
-</div>
-
-<!-- FontAwesome for Icons -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
-
-<script>
-document.querySelectorAll(".custom-meta").forEach(async (element) => {
-    const nid = element.getAttribute("data-nid");
-    if (!nid || nid === "undefined") {
-        console.error("Error: No NID found for an element", element);
-        return;
-    }
-
-    try {
-        const response = await fetch(`/jsonapi/node/blog/${nid}`);
-        if (!response.ok) throw new Error("API request failed");
-
-        const data = await response.json();
-        const blog = data.data.attributes;
-
-        element.querySelector(".views-count").innerText = blog.field_views || 0;
-        element.querySelector(".likes-count").innerText = blog.field_likes || 0;
-
-        if (!sessionStorage.getItem(`viewed-${nid}`)) {
-            await fetch(`/api/blog/${nid}/views`, { method: "POST" });
-            sessionStorage.setItem(`viewed-${nid}`, "true");
-            element.querySelector(".views-count").innerText = blog.field_views + 1;
-        }
-    } catch (error) {
-        console.error("Failed to fetch blog data:", error);
-    }
-});
-
-// Like button functionality
-document.querySelectorAll(".like-btn").forEach(button => {
-    button.addEventListener("click", async () => {
-        const nid = button.getAttribute("data-nid");
-        if (!nid) return;
-
-        if (sessionStorage.getItem(`liked-${nid}`)) {
-            alert("You have already liked this post.");
-            return;
-        }
-
-        try {
-            const response = await fetch(`/api/blog/${nid}/likes`, { method: "POST" });
-            if (!response.ok) throw new Error("Failed to update likes");
-
-            const likesCount = button.querySelector(".likes-count");
-            likesCount.innerText = parseInt(likesCount.innerText) + 1;
-            sessionStorage.setItem(`liked-${nid}`, "true");
-        } catch (error) {
-            console.error("Error liking the post:", error);
-        }
-    });
-});
-</script> #}
-<div{{ attributes.addClass('custom-views-grid') }}>
+{# <div{{ attributes.addClass('custom-views-grid') }}>
   {% for row in items %}
     <div{{ row.attributes.addClass('custom-row') }}>
       {% for column in row.content %}
@@ -239,5 +158,140 @@ document.querySelectorAll(".like-btn").forEach(button => {
   }
   .static-btn:hover {
     transform: scale(1.1);
+  }
+</style> #}
+
+
+{{ attach_library('icecream/js/blog_interactions') }}
+<div{{ attributes.addClass('custom-views-grid') }}>
+  {% for row in items %}
+    <div{{ row.attributes.addClass('custom-row') }}>
+      {% for column in row.content %}
+        <div{{ column.attributes.addClass('custom-col') }}>
+          {{- column.content -}}
+          
+          {% if column.content['#node'] is defined and column.content['#node'].id is defined %}
+            {% set nid = column.content['#node'].id %}
+            {% set likes = column.content['#node'].field_likes.value|default(0) %}
+            {% set views = column.content['#node'].field_views.value|default(0) %}
+          {% else %}
+            {% set nid = 0 %}
+            {% set likes = 0 %}
+            {% set views = 0 %}
+          {% endif %}
+
+          <div class="custom-meta" data-nid="{{ nid }}">
+            <!-- Like Button -->
+            <button class="like-btn"><i class="fas fa-heart"></i> <span class="likes-count">{{ likes }}</span></button>
+            
+            <!-- View Count -->
+            <span class="view-btn"><i class="fas fa-eye"></i> <span class="views-count">{{ views }}</span></span>
+            
+            <!-- Comments (Static for now) -->
+            <span><i class="fas fa-comment"></i> 0</span>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+
+<!-- FontAwesome for Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+
+<script>
+document.querySelectorAll(".like-btn").forEach(button => {
+  button.addEventListener("click", async () => {
+    let metaElement = button.closest(".custom-meta");
+    if (!metaElement) {
+      console.error("Error: .custom-meta not found for", button);
+      return;
+    }
+
+    let nid = metaElement.getAttribute("data-nid");
+    if (!nid || nid === "0") {
+      console.error("Error: Node ID is missing or invalid");
+      return;
+    }
+
+    try {
+      let response = await fetch(`/api/blog/${nid}/like`, { method: "POST" });
+      let data = await response.json();
+      
+      if (data.status === "success") {
+        let count = button.querySelector(".likes-count");
+        count.innerText = data.new_likes_count; // Update from API
+        button.style.color = "green";
+      }
+    } catch (error) {
+      console.error("Error updating likes:", error);
+    }
+  });
+});
+
+document.querySelectorAll(".view-btn").forEach(button => {
+  button.addEventListener("click", async () => {
+    let metaElement = button.closest(".custom-meta");
+    if (!metaElement) {
+      console.error("❌ ERROR: .custom-meta not found for", button);
+      return;
+    }
+
+    let nid = metaElement.getAttribute("data-nid");
+    if (!nid || nid === "0") {
+      console.error("❌ ERROR: Invalid Node ID", nid);
+      return;
+    }
+
+    let url = `/api/blog/${nid}/view`;
+    console.log("🔗 Fetching URL:", url);  // ✅ Log the request URL
+
+    try {
+      let response = await fetch(url, { method: "POST" });
+
+      console.log("✅ Fetch Response:", response);  // ✅ Log full response
+
+      if (!response.ok) {
+        console.error("❌ ERROR: Response not OK", response.status);
+        return;
+      }
+
+      let data = await response.json();
+      console.log("✅ API Data:", data);
+
+      if (data.status === "success") {
+        let countElement = button.querySelector(".views-count");
+        if (countElement) {
+          countElement.innerText = data.new_views_count;  // ✅ Update UI
+        } else {
+          console.error("❌ ERROR: .views-count not found inside .view-btn");
+        }
+      }
+    } catch (error) {
+      console.error("❌ ERROR: Fetch failed", error);
+    }
+  });
+});
+
+</script>
+
+<style>
+  .like-btn, .view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  .like-btn:hover, .view-btn:hover {
+    transform: scale(1.1);
+  }
+  .like-btn {
+    color: black;
+  }
+  .like-btn.active {
+    color: red;
   }
 </style>

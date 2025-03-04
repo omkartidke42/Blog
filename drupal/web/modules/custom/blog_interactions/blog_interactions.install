@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Install file for the Blog Interactions module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_install().
+ */
+function blog_interactions_install() {
+  $database = Database::getConnection();
+  $schema = $database->schema();
+
+  if (!$schema->tableExists('blog_interactions')) {
+    $schema->createTable('blog_interactions', [
+      'fields' => [
+        'id' => [
+          'type' => 'serial',
+          'not null' => TRUE,
+        ],
+        'nid' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'unique' => TRUE,
+        ],
+        'views' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'likes' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+      ],
+      'primary key' => ['id'],
+    ]);
+  }
+}
