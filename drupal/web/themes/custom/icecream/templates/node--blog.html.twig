@@ -117,7 +117,7 @@
       <!-- Blog Tags -->
       {% if content.field_tag %}
         <div class="blog-tags">
-          <strong>Tags:</strong> {{ content.field_tag }}
+          <strong>{{ 'Tags:'|t }}</strong> {{ content.field_tag }}
         </div>
       {% endif %}
 
@@ -131,11 +131,13 @@
       <!-- Blog Content -->
       {% if content.field_blog_content %}
         <div class="blog-content">
+        {# {{ 'Welcome to our website'|t }} #}
+
           {{ content.field_blog_content }}
         </div>
          <div{{ content_attributes.addClass('node__content') }}>
 
-        {{ content }}
+        {# {{ content }} #}
         <p class="reading-time"><em>Estimated reading time: {{ reading_time }} minute(s)</em></p>
         <p class="word-count">Word Count: {{ word_count }}</p>
 
@@ -145,6 +147,7 @@
       <!-- Footer -->
       <div class="blog-footer">
         <p>Powered by Drupal | Dark Mode Blog</p>
+        
       </div>
     </div>
 
