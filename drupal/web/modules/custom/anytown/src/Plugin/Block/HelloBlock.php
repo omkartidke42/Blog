@@ -24,7 +24,7 @@ class HelloBlock extends BlockBase {
    */
   public function build(): array {
     $build['content'] = [
-      '#markup' => $this->t('Hello, World!'),
+      // '#markup' => $this->t('Hello, World!'),
     ];
     return $build;
   }

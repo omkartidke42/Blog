@@ -1,0 +1,33 @@
+# name: social_links
+# status: stable
+# props:
+#   type: object
+#   required:
+#     - links
+#   properties:
+#     links:
+#       type: array
+#       title: Social Media Links
+#       description: "A list of social media links with icons."
+#       items:
+#         type: object
+#         required:
+#           - url
+#           - icon
+#           - alt
+#         properties:
+#           url:
+#             type: string
+#             title: URL
+#             description: "The URL of the social media profile."
+#             example: "https://www.facebook.com"
+#           icon:
+#             type: string
+#             title: Icon
+#             description: "The icon file path for the social media platform."
+#             example: "facebook.svg"
+#           alt:
+#             type: string
+#             title: Alt Text
+#             description: "The alt text for the social media icon."
+#             example: "Follow us on Facebook"
