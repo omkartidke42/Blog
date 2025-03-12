@@ -1,0 +1,5 @@
+name: 'Text Transformer Plugin'
+type: module
+description: 'Demo custom plugin type for transforming text.'
+core_version_requirement: ^11
+package: Custom

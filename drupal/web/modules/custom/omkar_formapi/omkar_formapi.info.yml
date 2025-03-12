@@ -1,0 +1,5 @@
+name: 'Omkar Form API'
+type: module
+description: 'Form that saves submitted data to custom DB table.'
+core_version_requirement: ^11
+package: Custom
