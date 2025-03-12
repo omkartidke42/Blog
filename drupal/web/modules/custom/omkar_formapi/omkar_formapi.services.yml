@@ -1,0 +1,3 @@
+services:
+  email.validator:
+    class: Egulias\EmailValidator\EmailValidator

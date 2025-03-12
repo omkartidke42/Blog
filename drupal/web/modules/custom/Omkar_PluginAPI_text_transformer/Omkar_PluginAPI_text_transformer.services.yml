@@ -1,0 +1,4 @@
+services:
+  text_transformer.manager:
+    class: Drupal\Omkar_PluginAPI_text_transformer\TextTransformerManager
+    arguments: ['@container.namespaces', '@cache.default', '@module_handler']

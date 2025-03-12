@@ -1,0 +1,15 @@
+omkar_formapi.form:
+  path: '/omkar-form'
+  defaults:
+    _form: '\Drupal\omkar_formapi\Form\OmkarForm'
+    _title: 'Omkar Form'
+  requirements:
+    _permission: 'access content'
+
+omkar_formapi.settings:
+  path: '/admin/config/system/omkar_formapi'
+  defaults:
+    _form: '\Drupal\omkar_formapi\Form\OmkarForm'
+    _title: 'Omkar Form Settings'
+  requirements:
+    _permission: 'administer site configuration'

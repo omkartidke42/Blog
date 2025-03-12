@@ -1,0 +1,7 @@
+omkar_pluginapi_text_transformer.demo:
+  path: '/text-transformer-demo'
+  defaults:
+    _controller: '\Drupal\Omkar_PluginAPI_text_transformer\Controller\TextTransformerController::content'
+    _title: 'Text Transformer Demo'
+  requirements:
+    _permission: 'access content'
