@@ -1,5 +1,5 @@
-name: 'Omkar Form API'
+name: Omkar FormAPI
 type: module
-description: 'Form that saves submitted data to custom DB table.'
+description: 'Custom module to explore Form API with AJAX and submission preview.'
 core_version_requirement: ^11
 package: Custom
