@@ -7,7 +7,28 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 
+// OmkarPlugin DI
+use Drupal\omkar_pluginapi\OmkarPluginapiPluginManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+
 class OmkarFormApiForm extends ConfigFormBase {
+
+  /////////////////////////////////////////////////
+  protected $pluginManager;
+
+public function __construct(OmkarPluginapiPluginManager $plugin_manager) {
+  $this->pluginManager = $plugin_manager;
+}
+
+public static function create(ContainerInterface $container) {
+  return new static(
+    $container->get('plugin.manager.omkar_pluginapi')
+  );
+}
+
+
+  /////////////////////////////////////////////////
 
   public function getFormId() {
     return 'omkar_formapi_form';
@@ -18,6 +39,16 @@ class OmkarFormApiForm extends ConfigFormBase {
   }
   
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    /////////////////////////////////
+    $schema = \Drupal::database()->schema();
+if (!$schema->tableExists('omkar_formapi_data')) {
+  \Drupal::messenger()->addError('Table does NOT exist!');
+} else {
+  \Drupal::messenger()->addStatus('Table exists ✅');
+}
+
+    /////////////////////////////////
     $config = $this->config('omkar_formapi.settings');
 
     $form['name'] = [
@@ -57,6 +88,24 @@ class OmkarFormApiForm extends ConfigFormBase {
       '#type' => 'markup',
       '#markup' => '<div id="preview-wrapper">' . $this->renderPreview($form_state) . '</div>',
     ];
+    /////////////////////////////////////////////////////////////
+    // 🔥 Render plugin info here
+  $plugins = $this->pluginManager->getDefinitions();
+  $form['plugin_sandwich_list'] = [
+    '#type' => 'details',
+    '#title' => $this->t('Available Sandwich Plugins 🍔'),
+    '#open' => TRUE,
+  ];
+
+  foreach ($plugins as $plugin_id => $definition) {
+    $form['plugin_sandwich_list'][$plugin_id] = [
+      '#type' => 'item',
+      '#title' => $definition['label'],
+      '#markup' => '<p>' . $definition['description'] . '</p><p><strong>Calories:</strong> ' . $definition['calories'] . '</p>',
+    ];
+  }
+      /////////////////////////////////////////////////////////////
+
 
     return parent::buildForm($form, $form_state);
   }
@@ -76,13 +125,35 @@ class OmkarFormApiForm extends ConfigFormBase {
     return '<div><h4>Live Preview:</h4><p><strong>Name:</strong> ' . $name . '</p><p><strong>Email:</strong> ' . $email . '</p><p><strong>Message:</strong> ' . $message . '</p></div>';
   }
 
+  // public function submitForm(array &$form, FormStateInterface $form_state) {
+  //   $this->config('omkar_formapi.settings')
+  //     ->set('name', $form_state->getValue('name'))
+  //     ->set('email', $form_state->getValue('email'))
+  //     ->set('message', $form_state->getValue('message'))
+  //     ->save();
+
+  //   parent::submitForm($form, $form_state);
+  // }
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    // Save to custom table.
+    \Drupal::database()->insert('omkar_formapi_data')
+    ->fields([
+      'name' => $form_state->getValue('name'),
+      'email' => $form_state->getValue('email'),
+      'message' => $form_state->getValue('message'),
+      'created' => \Drupal::time()->getCurrentTime(),
+    ])
+    ->execute();
+  
+  
+    // Optionally also save to config.
     $this->config('omkar_formapi.settings')
       ->set('name', $form_state->getValue('name'))
       ->set('email', $form_state->getValue('email'))
       ->set('message', $form_state->getValue('message'))
       ->save();
-
+  
     parent::submitForm($form, $form_state);
   }
+  
 }

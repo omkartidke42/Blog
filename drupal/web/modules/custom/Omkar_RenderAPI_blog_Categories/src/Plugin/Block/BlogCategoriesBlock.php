@@ -51,6 +51,9 @@ class BlogCategoriesBlock extends BlockBase implements ContainerFactoryPluginInt
     );
   }
 
+
+  // \Drupal::service('entity_type.manager') 
+
   /**
    * {@inheritdoc}
    */
