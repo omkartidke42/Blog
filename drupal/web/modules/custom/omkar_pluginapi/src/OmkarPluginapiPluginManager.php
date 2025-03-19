@@ -30,11 +30,9 @@ final class OmkarPluginapiPluginManager extends DefaultPluginManager {
 //    \Traversable $namespaces
 // A list of available namespaces in the codebase.
 // Used to scan for plugin classes in subdirectories like Plugin/OmkarPluginapi.
-
 // CacheBackendInterface $cache_backend
 // Drupal's cache backend service.
 // Used to store plugin discovery results for performance.
-
 // ModuleHandlerInterface $module_handler
 // Service to interact with Drupal modules.
 // Used to run hook implementations or alter plugin definitions.

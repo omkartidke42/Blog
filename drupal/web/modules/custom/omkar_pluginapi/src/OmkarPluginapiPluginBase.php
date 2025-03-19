@@ -15,7 +15,6 @@ abstract class OmkarPluginapiPluginBase extends PluginBase implements OmkarPlugi
    * {@inheritdoc}
    */
   public function label(): string {
-    // Cast the label to a string since it is a TranslatableMarkup object.
     return (string) $this->pluginDefinition['label'];
   }
   
@@ -27,9 +26,9 @@ abstract class OmkarPluginapiPluginBase extends PluginBase implements OmkarPlugi
     return $this->pluginDefinition['description'];
   }
 
-   /**
-   * {@inheritdoc}
-   */
+    /**
+     * {@inheritdoc}
+     */
   public function calories()
   {
     return $this->pluginDefinition['calories'];
@@ -40,7 +39,4 @@ abstract class OmkarPluginapiPluginBase extends PluginBase implements OmkarPlugi
    * {@inheritdoc}
    */
   // abstract public function order(array $extras);
-
-
-
 }
