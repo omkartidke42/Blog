@@ -1,0 +1,14 @@
+omkar_entityapi.status_update:
+  path: '/node/{node}/status'
+  defaults:
+    _title: 'Weekly Status update'
+    _form: 'Drupal\omkar_entityapi\Form\StatusUpdateForm'
+  requirements:
+    _permission: 'access content'
+    _entity_access: node.update
+    options:
+    parameters:
+      node:
+        type: entity:node
+        bundle:
+          - vendor
