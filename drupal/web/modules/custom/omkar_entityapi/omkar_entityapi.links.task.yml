@@ -1,0 +1,5 @@
+omkar_entity.node.attendance_form:
+  route_name: omkar_entityapi.status_update
+  base_route: entity.node.canonical
+  title: Attendance
+  weight: 10
