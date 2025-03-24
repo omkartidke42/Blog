@@ -1,5 +1,22 @@
-omkar_entity.node.attendance_form:
-  route_name: omkar_entityapi.status_update
-  base_route: entity.node.canonical
-  title: Attendance
+entity.omkar_entityapi_profile.settings:
+  title: 'Settings'
+  route_name: entity.omkar_entityapi_profile.settings
+  base_route: entity.omkar_entityapi_profile.settings
+entity.omkar_entityapi_profile.view:
+  title: 'View'
+  route_name: entity.omkar_entityapi_profile.canonical
+  base_route: entity.omkar_entityapi_profile.canonical
+entity.omkar_entityapi_profile.edit_form:
+  title: 'Edit'
+  route_name: entity.omkar_entityapi_profile.edit_form
+  base_route: entity.omkar_entityapi_profile.canonical
+entity.omkar_entityapi_profile.delete_form:
+  title: 'Delete'
+  route_name: entity.omkar_entityapi_profile.delete_form
+  base_route: entity.omkar_entityapi_profile.canonical
+  weight: 10
+entity.omkar_entityapi_profile.collection:
+  title: 'Profiles'
+  route_name: entity.omkar_entityapi_profile.collection
+  base_route: system.admin_content
   weight: 10

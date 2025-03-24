@@ -1,5 +1,5 @@
 name: 'omkar_entityapi'
 type: module
-description: 'Simple ui for weekly status update.'
-package: '@todo Add package'
+description: 'demonstrates implementation of entityapi'
+package: Custom
 core_version_requirement: ^10 || ^11

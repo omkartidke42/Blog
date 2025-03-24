@@ -10,7 +10,7 @@
     <style>
       /* Apply Dark Theme to Whole Page */
       body {
-          background-color: #0a0a0a;
+          background-color:rgb(241, 237, 237);
           color: #ffffff;
           font-family: Arial, sans-serif;
           margin: 0;
@@ -39,7 +39,6 @@
           font-weight: bold;
           text-align: center;
           margin-bottom: 15px;
-          color:rgb(247, 211, 12); /* Spotify Green */
       }
 
       /* Blog Tags Styling */
@@ -111,8 +110,11 @@
     <div class="blog-container">
       <!-- Blog Title -->
       {% if content.field_title %}
-        <h1 class="blog-title">{{ content.field_title }}</h1>
-      {% endif %}
+  <h1 class="blog-title" style="background-color: {{ title_bg_color|default('#000') }};">
+    {{ content.field_title }}
+  </h1>
+{% endif %}
+
 
       <!-- Blog Tags -->
       {% if content.field_tag %}
@@ -140,6 +142,8 @@
         {# {{ content }} #}
         <p class="reading-time"><em>Estimated reading time: {{ reading_time }} minute(s)</em></p>
         <p class="word-count">Word Count: {{ word_count }}</p>
+
+        <h1>{{ content.field_ewwef }}</h1>
 
   </div>
       {% endif %}

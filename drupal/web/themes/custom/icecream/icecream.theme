@@ -1,6 +1,14 @@
 <?php
+
 /**
+ * @file
  * Implements hook_preprocess_page().
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ *
  */
 function icecream_preprocess_page(&$variables) {
   // // Pass custom footer text to the template.
@@ -8,7 +16,6 @@ function icecream_preprocess_page(&$variables) {
   // // Pass custom background color to the template.
   // $variables['icecream_custom_color'] = theme_get_setting('icecream_custom_color');
   // // Pass dark mode setting to the template.
-
   if (\Drupal::routeMatch()->getRouteName() === 'entity.node.canonical' &&
       isset($variables['node']) &&
       $variables['node']->getType() === 'blog') {
@@ -16,24 +23,24 @@ function icecream_preprocess_page(&$variables) {
   }
 
   $current_path = \Drupal::service('path.current')->getPath();
-    $variables['is_homepage'] = ($current_path == '/');
+  $variables['is_homepage'] = ($current_path == '/');
 
-    // Check if this is a blog page
-    if (\Drupal::routeMatch()->getRouteName() === 'entity.node.canonical') {
-      $node = \Drupal::routeMatch()->getParameter('node');
-  
-      if ($node instanceof \Drupal\node\NodeInterface && $node->bundle() === 'blog') {
-        // Get the blog title
-        $blog_title = $node->getTitle();
-  
-        $greeting_message = "Welcome to " . $blog_title . "!";
-  
-        $variables['#attached']['drupalSettings']['blogGreeting'] = $greeting_message;
-  
-        // Attach the JavaScript behavior
-        $variables['#attached']['library'][] = 'mytheme/blog_greeting';
-      }
+  // Check if this is a blog page.
+  if (\Drupal::routeMatch()->getRouteName() === 'entity.node.canonical') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+
+    if ($node instanceof NodeInterface && $node->bundle() === 'blog') {
+      // Get the blog title.
+      $blog_title = $node->getTitle();
+
+      $greeting_message = "Welcome to " . $blog_title . "!";
+
+      $variables['#attached']['drupalSettings']['blogGreeting'] = $greeting_message;
+
+      // Attach the JavaScript behavior.
+      $variables['#attached']['library'][] = 'mytheme/blog_greeting';
     }
+  }
 }
 
 /**
@@ -41,69 +48,86 @@ function icecream_preprocess_page(&$variables) {
  */
 function icecream_theme_suggestions_alter(array &$suggestions, array $variables) {
   // Check if rendering a node.
-  if (isset($variables['node']) && $variables['node'] instanceof \Drupal\node\NodeInterface) {
+  if (isset($variables['node']) && $variables['node'] instanceof NodeInterface) {
     $node = $variables['node'];
-    
+
     // Apply custom template for "blog" content type.
     if ($node->bundle() == 'blog') {
-      $suggestions[] = 'node__blog'; // Loads "node--blog.html.twig"
-      
-      // Check if the blog post is "Featured"
+      // Loads "node--blog.html.twig".
+      $suggestions[] = 'node__blog';
+
+      // Check if the blog post is "Featured".
       if ($node->hasField('field_featured') && $node->get('field_featured')->value == 1) {
-        $suggestions[] = 'node__blog__featured'; // Loads "node--blog--featured.html.twig"
+        // Loads "node--blog--featured.html.twig".
+        $suggestions[] = 'node__blog__featured';
       }
     }
   }
 }
 
-// Pre process function for reading time estimate and word count
-
+/**
+ * Pre process function for reading time estimate and word count.
+ */
 function icecream_preprocess_node(array &$variables) {
+  // dump($variables);
+  
+  if ($variables['node']->hasField('field_ewwef')) {
+    $field = $variables['node']->get('field_ewwef')->first();
+    if ($field) {
+      $color = sprintf('#%02x%02x%02x', $field->red, $field->green, $field->blue);
+      $variables['title_bg_color'] = $color;
+    }
+  }
+  
+  // Ensure it's a blog content type.
+  if ($variables['node']->getType() == 'blog') {
 
-  if ($variables['node']->getType() == 'blog') { // Ensure it's a blog content type
-
-    // Check if the node has 'field_blog_content' and it's not empty
+    // Check if the node has 'field_blog_content' and it's not empty.
     if ($variables['node']->hasField('field_blog_content') && !$variables['node']->get('field_blog_content')->isEmpty()) {
-      // Get the field value properly
+      // Get the field value properly.
       $content_values = $variables['node']->get('field_blog_content')->getValue();
-      
-      if (!empty($content_values[0]['value'])) {
-        $content = $content_values[0]['value']; // Extract the actual text
-        $clean_content = strip_tags($content); // Remove HTML tags
-        $word_count = str_word_count($clean_content); // Count words
 
-        // Store the word count in variables for Twig
+      if (!empty($content_values[0]['value'])) {
+        // Extract the actual text.
+        $content = $content_values[0]['value'];
+        // Remove HTML tags.
+        $clean_content = strip_tags($content);
+        // Count words.
+        $word_count = str_word_count($clean_content);
+
+        // Store the word count in variables for Twig.
         $variables['word_count'] = $word_count;
 
-        // Debugging logs
+        // Debugging logs.
         \Drupal::logger('blog_features')->notice('Word count: @count', ['@count' => $word_count]);
-      } else {
+      }
+      else {
         \Drupal::logger('blog_features')->warning('field_blog_content exists but has no content.');
         $variables['word_count'] = 0;
       }
-    } else {
+    }
+    else {
       \Drupal::logger('blog_features')->warning('field_blog_content is missing or empty.');
       $variables['word_count'] = 0;
     }
   }
-  /////////////////////////////////////////////////////
+  //
   // Get the node object.
   $node = $variables['node'] ?? NULL;
 
   // Ensure this is a node object and the correct content type.
-  if ($node instanceof \Drupal\node\NodeInterface && $node->bundle() === 'blog') {
-    
+  if ($node instanceof NodeInterface && $node->bundle() === 'blog') {
+
     // Check if the 'body' field exists and is not empty.
     if ($node->hasField('field_blog_content') && !$node->get('field_blog_content')->isEmpty()) {
       $body = $node->get('field_blog_content')->value;
       $word_count = str_word_count(strip_tags($body));
       $reading_time = ceil($word_count / 200);
       $variables['reading_time'] = $reading_time;
-    } else {
+    }
+    else {
       // If body field is missing, set a default value.
       $variables['reading_time'] = 0;
     }
   }
 }
-
-
