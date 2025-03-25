@@ -1,0 +1,5 @@
+name: 'Omkar State API'
+type: module
+description: 'Stores and displays last published blog time using State API.'
+core_version_requirement: ^11
+package: Custom
