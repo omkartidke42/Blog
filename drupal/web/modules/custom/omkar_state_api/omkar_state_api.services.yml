@@ -1,0 +1,6 @@
+services:
+  omkar_state_api.subscriber:
+    class: Drupal\omkar_state_api\EventSubscriber\OmkarStateApiSubscriber
+    arguments: ['@state', '@messenger']
+    tags:
+      - { name: event_subscriber }
