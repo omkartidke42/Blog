@@ -23,7 +23,7 @@
         "drupal/devel_kint_extras": "^1.1",
         "drupal/examples": "^4.0",
         "drupal/webform": "^6.3@beta",
-        "drush/drush": "^13.3",
+        "drush/drush": "^13.4",
         "symfony/validator": "^7.2"
     },
     "conflict": {
