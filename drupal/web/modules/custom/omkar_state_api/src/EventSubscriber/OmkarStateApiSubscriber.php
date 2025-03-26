@@ -20,15 +20,22 @@ class OmkarStateApiSubscriber implements EventSubscriberInterface {
     $this->messenger = $messenger;
   }
 
+  /**
+   *
+   */
   public static function getSubscribedEvents() {
     return [
       BlogPublishedEvent::EVENT_NAME => ['onBlogPublished'],
     ];
   }
 
+  /**
+   *
+   */
   public function onBlogPublished(BlogPublishedEvent $event) {
     $node = $event->getNode();
     $this->state->set('omkar_state_api.last_published_time', \Drupal::time()->getCurrentTime());
     $this->messenger->addMessage(t('Last published blog time updated.'));
   }
+
 }

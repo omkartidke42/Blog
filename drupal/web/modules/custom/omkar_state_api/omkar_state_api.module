@@ -10,6 +10,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 function omkar_state_api_entity_insert($entity) {
   if ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'blog' && $entity->isPublished()) {
     $state = \Drupal::state();
-    $state->set('omkar_state_api.last_published_time', \Drupal::time()->getCurrentTime());
+    // $state->set('omkar_state_api.last_published_time', \Drupal::time()->getCurrentTime());
   }
 }
