@@ -62,7 +62,6 @@ function omkar_hooks_events_form_alter(array &$form, FormStateInterface $form_st
  * Implements hook_entity_update().
  */
 function omkar_hooks_events_entity_update($entity) {
-  // Ensure the entity is a node before proceeding.
   if ($entity instanceof NodeInterface) {
     // Check if the node is a blog and is published.
     if ($entity->bundle() === 'blog' && $entity->isPublished()) {
