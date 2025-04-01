@@ -1,15 +1,21 @@
 <?php
 
-use Drupal\Core\State\StateInterface;
-use Drupal\Core\Messenger\MessengerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+/**
+ * @file
+ */
+
+use Drupal\omkar_state_api\Event\BlogPublishedEvent;
 
 /**
  * Implements hook_entity_insert().
  */
 function omkar_state_api_entity_insert($entity) {
   if ($entity->getEntityTypeId() === 'node' && $entity->bundle() === 'blog' && $entity->isPublished()) {
-    $state = \Drupal::state();
-    // $state->set('omkar_state_api.last_published_time', \Drupal::time()->getCurrentTime());
+    $dispatcher = \Drupal::service('event_dispatcher');
+
+    $event = new BlogPublishedEvent($entity);
+
+    $dispatcher->dispatch($event, BlogPublishedEvent::EVENT_NAME);
+
   }
 }
